@@ -252,5 +252,5 @@ private:
      * @param message - the error message that is printed
      */
     void error(string message) const;
-    std::vector<std::string> file_to_vector(const std::string & filename);
+    //std::vector<std::string> file_to_vector(const std::string & filename);
 };

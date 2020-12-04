@@ -3,7 +3,8 @@
 
 #include "../catch/catch.hpp"
 #include "../readFromFile.hpp"
-
+#include "graphs.h"
+#include "edge.h"
 
 TEST_CASE("Verify that file_to_string works on a small example") {
 	std::string res = file_to_string("tests/smallSample.txt");
