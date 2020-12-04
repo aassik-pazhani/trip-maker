@@ -3,22 +3,16 @@
 
 #include "../catch/catch.hpp"
 #include "../readFromFile.hpp"
-#include "graphs.h"
-#include "edge.h"
+#include "../graphs.h"
 
-TEST_CASE("Verify that file_to_string works on a small example") {
-	std::string res = file_to_string("tests/smallSample.txt");
-	// always check "expected" == "actual" --> be consistent
-	REQUIRE("hello\nstudents\nof\ncs\n225\n!!!\n" == res);
+TEST_CASE("Test Graph Constructor") {
+	Graph g = Graph("small_set_airports.txt", "small_set_routes.txt");
+	vector<Edge> edges = g.getEdges();
+
+	REQUIRE(g.vertexExists("ORD"));
+	REQUIRE(g.vertexExists("STL"));
+	REQUIRE(g.vertexExists("BRL"));
+
+	REQUIRE(g.edgeExists("ORD", "BRL"));
+	REQUIRE(g.edgeExists("BRL", "STL"));
 }
-
-TEST_CASE("Verify that file_to_vector works on a small example") {
-	std::vector<std::string> res = file_to_vector("tests/smallSample.txt");
-	std::string expected[] = {"hello", "students", "of", "cs", "225", "!!!"};
-	
-	REQUIRE(6 == res.size());
-
-	for (int i = 0; i < res.size(); i++) {
-		REQUIRE(expected[i] == res[i]);
-	}
-}		

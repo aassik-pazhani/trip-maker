@@ -63,7 +63,7 @@ public:
      * @param numVertices - the number of vertices the graph will have
      * @param seed - a random seed to create the graph with
      */
-    Graph(int numVertices, unsigned long seed);
+    Graph(string airports_file, string routes_file); //(int numVertices, unsigned long seed);
 
     /**
      * Gets all adjacent vertices to the parameter vertex.

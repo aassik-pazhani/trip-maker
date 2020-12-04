@@ -1,4 +1,4 @@
-#include "graph.h"
+#include "graphs.h"
 #include "readFromFile.hpp"
 
 const Vertex Graph::InvalidVertex = "_CS225INVALIDVERTEX";
