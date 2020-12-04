@@ -19,13 +19,13 @@ Graph::Graph(string airports_file, string routes_file)  //(int numVertices, unsi
     vector<string> routes = file_to_vector(routes_file);
     for (string route : routes) {
         size_t pos = route.find(",");
-        for (size_t i = 0; i < 4; i++) {
+        for (size_t i = 0; i < 3; i++) {
             pos = route.find(",", pos + 1);
             if (i == 0) {
-                source = route.substr(pos + 1, pos + 4);
+                source = route.substr(pos + 1, 3);
             }
-            if (i == 3) {
-                destination = route.substr(pos + 1, pos + 4);
+            if (i == 2) {
+                destination = route.substr(pos + 1, 3);
             }
         }
         insertEdge(source, destination);
@@ -36,41 +36,7 @@ Graph::Graph(string airports_file, string routes_file)  //(int numVertices, unsi
      exit(1);
     }
     
-    std::string filename = "small_set_airports.txt";
-    std::ifstream text(filename);
-    std::string input;
-    vector<Vertex> vertices;
-    while(!text.eof())
-    {
-        std::getline(text, input);
-        insertVertex(input); //push the IATA (i.e. ORD) into the graph.
-        vertices.push_back(input);
-    }
-
-    filename = "small_set_routes.txt";
-    std::ifstream text(filename);
-    std::string source;
-    std::string destination;
-    vector<Vertex> edges;
-    while (!text.eof())
-    {
-        std::getline(text, input);
-        int count = 0;
-        int i = 0;
-        while (count < 5) {
-            if (input[i] == ",") count++;
-            if (count == 2) {
-                source = input.substring(i, i + 3);
-            }
-            if (count == 4) {
-                destination = input.substring(i, i + 3);
-            }
-            i++;
-        }
-        insertEdge(source, destination);
-    }*/
     // make sure all vertices are connected
-    /*
     random.shuffle(vertices);
     Vertex cur = vertices[0];
     for (size_t i = 0; i < vertices.size() - 1; ++i)
