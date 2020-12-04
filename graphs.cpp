@@ -1,31 +1,36 @@
 #include "graph.h"
-
+#include "readFromFile.hpp"
 
 const Vertex Graph::InvalidVertex = "_CS225INVALIDVERTEX";
 const int Graph::InvalidWeight = INT_MIN;
 const string Graph:: InvalidLabel = "_CS225INVALIDLABEL";
 const Edge Graph::InvalidEdge = Edge(Graph::InvalidVertex, Graph::InvalidVertex, Graph::InvalidWeight, Graph::InvalidLabel);
 
-Graph::std::vector<std::string> file_to_vector(const std::string & filename) {
-	std::ifstream text(filename);
-	std::vector<std::string> out;
 
-	if (text.is_open()) {
-		std::istream_iterator<std::string> iter(text);
-		while (!text.eof()) {
-			out.push_back(*iter);
-			++iter;
-		}
-	}
-
-	return out;
-}
-
-
-Graph::Graph(int numVertices, unsigned long seed)
-    :directed(true), random(Random(seed)) 
+Graph::Graph(string airports_file, string routes_file)  //(int numVertices, unsigned long seed)
+   // :directed(true), random(Random(seed)) 
 {
-    if (numVertices < 2)
+    vector<string> airports = file_to_vector(airports_file);
+    for (string airport : airports) {
+        insertVertex(airport.substr(0, 3));
+    }
+    Vertex source;
+    Vertex destination;
+    vector<string> routes = file_to_vector(routes_file);
+    for (string route : routes) {
+        size_t pos = route.find(",");
+        for (size_t i = 0; i < 4; i++) {
+            pos = route.find(",", pos + 1);
+            if (i == 0) {
+                source = route.substr(pos + 1, pos + 4);
+            }
+            if (i == 3) {
+                destination = route.substr(pos + 1, pos + 4);
+            }
+        }
+        insertEdge(source, destination);
+    }
+   /* if (numVertices < 2)
     {
      error("numVertices too low");
      exit(1);
@@ -63,7 +68,7 @@ Graph::Graph(int numVertices, unsigned long seed)
             i++;
         }
         insertEdge(source, destination);
-    }
+    }*/
     // make sure all vertices are connected
     /*
     random.shuffle(vertices);
