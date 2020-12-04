@@ -6,6 +6,8 @@ const int Graph::InvalidWeight = INT_MIN;
 const string Graph:: InvalidLabel = "_CS225INVALIDLABEL";
 const Edge Graph::InvalidEdge = Edge(Graph::InvalidVertex, Graph::InvalidVertex, Graph::InvalidWeight, Graph::InvalidLabel);
 
+Graph::Graph() {
+}
 
 Graph::Graph(string airports_file, string routes_file)  //(int numVertices, unsigned long seed)
    // :directed(true), random(Random(seed)) 

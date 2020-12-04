@@ -1,5 +1,5 @@
 EXENAME = finalproj
-OBJS = readFromFile.o main.o graphs.o
+OBJS = readFromFile.o main.o graphs.o BFS.o
 
 CXX = clang++
 CXXFLAGS = $(CS225) -std=c++1y -stdlib=libc++ -c -g -O0 -Wall -Wextra -pedantic
@@ -33,11 +33,14 @@ $(EXENAME): output_msg $(OBJS)
 graph.o: graphs.cpp graphs.h
 	$(CXX) $(CXXFLAGS) graphs.cpp
 
+BFS.o: BFS.cpp BFS.h
+	$(CXX) $(CXXFLAGS) BFS.cpp
+
 readFromFile.o: main.cpp readFromFile.cpp
 	$(CXX) $(CXXFLAGS) main.cpp readFromFile.cpp
 
-test: output_msg catch/catchmain.cpp tests/tests.cpp readFromFile.cpp graphs.cpp
-	$(LD) catch/catchmain.cpp tests/tests.cpp readFromFile.cpp graphs.cpp $(LDFLAGS) -o test
+test: output_msg catch/catchmain.cpp tests/tests.cpp readFromFile.cpp graphs.cpp BFS.cpp
+	$(LD) catch/catchmain.cpp tests/tests.cpp readFromFile.cpp graphs.cpp BFS.cpp $(LDFLAGS) -o test
 
 clean:
 	-rm -f *.o $(EXENAME) test

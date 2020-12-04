@@ -56,6 +56,7 @@ using std::unordered_map;
 class Graph
 {
 public:
+    Graph();
     /**
      * Constructor to create a random, connected graph.
      * @param weighted - specifies whether the graph is a weighted graph or
