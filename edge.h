@@ -58,6 +58,17 @@ class Edge
     }
 
     /**
+     * Parameter constructor for weighted graphs.
+     * @param u - one vertex the edge is connected to
+     * @param v - the other vertex it is connected to
+     * @param w - the weight of the edge
+     */
+    Edge(Vertex u, Vertex v, int w)
+        : source(u), dest(v), label(""), weight(w)
+    { /* nothing */
+    }
+
+    /**
      * Default constructor.
      */
     Edge() : source(""), dest(""), label(""), weight(-1)

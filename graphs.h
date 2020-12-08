@@ -163,9 +163,10 @@ public:
      * Hence, an error is not thrown when it fails to insert an edge.
      * @param source - one vertex the edge is connected to
      * @param destination - the other vertex the edge is connected to
+     * @param weight - weight of the edge
      * @return whether inserting the edge was successful
      */
-    bool insertEdge(Vertex source, Vertex destination);
+    bool insertEdge(Vertex source, Vertex destination, int weight);
 
     /**
      * Removes the edge between two vertices.

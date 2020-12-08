@@ -1,5 +1,10 @@
 #include "graphs.h"
 #include "readFromFile.hpp"
+#include <map>
+#include"xytodistance.hpp"
+
+using std::pair;
+using std::map;
 
 const Vertex Graph::InvalidVertex = "_CS225INVALIDVERTEX";
 const int Graph::InvalidWeight = INT_MIN;
@@ -9,12 +14,20 @@ const Edge Graph::InvalidEdge = Edge(Graph::InvalidVertex, Graph::InvalidVertex,
 Graph::Graph() {
 }
 
-Graph::Graph(string airports_file, string routes_file)  //(int numVertices, unsigned long seed)
-   // :directed(true), random(Random(seed)) 
+Graph::Graph(string airports_file, string routes_file)
 {
     vector<string> airports = file_to_vector(airports_file);
+    map<string, pair<long double, long double>> locations;
+    vector<pair<long double, long double>> coordinates = getCoordinates(airports_file);
+    int i = 0;
     for (string airport : airports) {
-        insertVertex(airport.substr(0, 3));
+        size_t pos = airport.find(",");
+        for (int i = 0; i < 3, i++) {
+            pos = airport.find(",", pos + 1);
+        }
+        insertVertex(airport.substr(pos + 1, pos + 4));
+        locations.insert(airport, coordinates[i]);
+        i++;
     }
     Vertex source;
     Vertex destination;
@@ -30,57 +43,11 @@ Graph::Graph(string airports_file, string routes_file)  //(int numVertices, unsi
                 destination = route.substr(pos + 1, 3);
             }
         }
-        insertEdge(source, destination);
+        pair<long double, long double> sloc = locations.find(source);
+        pair<long double, long double> dloc = locations.find(destination);
+        double distance = getDistance(sloc, dloc);
+        insertEdge(source, destination, distance);
     }
-   /* if (numVertices < 2)
-    {
-     error("numVertices too low");
-     exit(1);
-    }
-    
-    // make sure all vertices are connected
-    random.shuffle(vertices);
-    Vertex cur = vertices[0];
-    for (size_t i = 0; i < vertices.size() - 1; ++i)
-    {
-        Vertex next = vertices[i + 1];
-        insertEdge(cur, next);
-        if (weighted) 
-        {
-            int weight = random.nextInt();
-            setEdgeWeight(cur, next, weight);
-        }
-        cur = next;
-    }
-    */
-
-    // keep the graph from being overpopulated with edges,
-    //  while still maintaining a little randomness
-    /*
-    int numFailures = 0;
-    int idx = 0;
-    random.shuffle(vertices);
-    while (numFailures < 2) 
-    {
-        if (!insertEdge(vertices[idx], vertices[idx + 1])) 
-        {
-            ++numFailures;
-        } 
-        else 
-        {
-            // if insertEdge() succeeded...
-            if (weighted)
-                setEdgeWeight(vertices[idx], vertices[idx + 1],
-                              random.nextInt());
-            ++idx;
-            if (idx >= numVertices - 2) 
-            {
-                idx = 0;
-                random.shuffle(vertices);
-            }
-        }
-    }
-    */
 }
 
 vector<Vertex> Graph::getAdjacent(Vertex source) const 
@@ -245,7 +212,7 @@ Vertex Graph::removeVertex(Vertex v)
     return InvalidVertex;
 }
 
-bool Graph::insertEdge(Vertex source, Vertex destination)
+bool Graph::insertEdge(Vertex source, Vertex destination, int weight)
 {
     if(adjacency_list.find(source)!= adjacency_list.end() 
     && adjacency_list[source].find(destination)!= adjacency_list[source].end())
@@ -259,14 +226,14 @@ bool Graph::insertEdge(Vertex source, Vertex destination)
         adjacency_list[source] = unordered_map<Vertex, Edge>();
     }
         //source vertex exists
-    adjacency_list[source][destination] = Edge(source, destination);
+    adjacency_list[source][destination] = Edge(source, destination, weight);
     if(!directed)
     {
         if(adjacency_list.find(destination)== adjacency_list.end())
         {
             adjacency_list[destination] = unordered_map<Vertex, Edge>();
         }
-        adjacency_list[destination][source] = Edge(source, destination);
+        adjacency_list[destination][source] = Edge(source, destination, weight);
     }
     
     return true;
