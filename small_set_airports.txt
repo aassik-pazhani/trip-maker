@@ -1,4 +1,3 @@
-ORD	"CHICAGO, ILLINOIS, USA             "	41
-STL	"ST. LOUIS, MISSOURI, USA           "	64
-BRL	"BURLINGTON, IOWA, USA              "	61
- 
+3830,"Chicago O'Hare International Airport","Chicago","United States","ORD","KORD",41.9786,-87.9048,672,-6,"A","America/Chicago","airport","OurAirports"
+3678,"St Louis Lambert International Airport","St. Louis","United States","STL","KSTL",38.748697,-90.370003,618,-6,"A","America/Chicago","airport","OurAirports"
+5726,"Southeast Iowa Regional Airport","Burlington","United States","BRL","KBRL",40.783199310302734,-91.12550354003906,698,-6,"A","America/Chicago","airport","OurAirports" 

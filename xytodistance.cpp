@@ -15,7 +15,7 @@ vector<pair<long double, long double>> getCoordinates(string airports_file) {
     vector<pair<long double, long double>> latlong;
     long double lat, lont;
     for (string airport : airports) {
-        size_t pos = route.find(",");
+        size_t pos = airport.find(",");
         size_t pos1;
         for (size_t i = 0; i < 6; i++) {
             pos = airport.find(",", pos + 1);

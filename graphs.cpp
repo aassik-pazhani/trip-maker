@@ -22,11 +22,11 @@ Graph::Graph(string airports_file, string routes_file)
     int i = 0;
     for (string airport : airports) {
         size_t pos = airport.find(",");
-        for (int i = 0; i < 3, i++) {
+        for (int i = 0; i < 3; i++) {
             pos = airport.find(",", pos + 1);
         }
         insertVertex(airport.substr(pos + 1, pos + 4));
-        locations.insert(airport, coordinates[i]);
+        locations.insert(pair<string, pair<long double, long double>> (airport.substr(pos + 1, pos + 4), coordinates[i]));
         i++;
     }
     Vertex source;
@@ -43,8 +43,8 @@ Graph::Graph(string airports_file, string routes_file)
                 destination = route.substr(pos + 1, 3);
             }
         }
-        pair<long double, long double> sloc = locations.find(source);
-        pair<long double, long double> dloc = locations.find(destination);
+        pair<long double, long double> sloc = locations.find(source)->second;
+        pair<long double, long double> dloc = locations.find(destination)->second;
         double distance = getDistance(sloc, dloc);
         insertEdge(source, destination, distance);
     }

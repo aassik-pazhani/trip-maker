@@ -14,5 +14,6 @@ int main(int argc, const char * argv[]) {
 	std::vector<std::string> vectorRepr = file_to_vector(argv[1]);
 	for (auto word : vectorRepr) {
 		std::cout << word << std::endl;
-	}	
+	}
+	return 0;
 }
