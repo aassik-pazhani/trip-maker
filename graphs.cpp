@@ -50,6 +50,7 @@ Graph::Graph(string airports_file, string routes_file)
     }
 }
 
+
 vector<Vertex> Graph::getAdjacent(Vertex source) const 
 {
     auto lookup = adjacency_list.find(source);
@@ -161,7 +162,7 @@ string Graph::getEdgeLabel(Vertex source, Vertex destination) const
     return adjacency_list[source][destination].getLabel();
 }
 */
-/*
+
 int Graph::getEdgeWeight(Vertex source, Vertex destination) const
 {
     if (!weighted)
@@ -171,7 +172,7 @@ int Graph::getEdgeWeight(Vertex source, Vertex destination) const
         return InvalidWeight;
     return adjacency_list[source][destination].getWeight();
 }
-*/
+
 
 void Graph::insertVertex(Vertex v)
 {

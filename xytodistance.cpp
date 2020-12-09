@@ -1,4 +1,5 @@
 #include "xytodistance.hpp"
+#include "readFromFile.hpp"
 #include<iostream>
 #include<vector>
 #include<cmath>
