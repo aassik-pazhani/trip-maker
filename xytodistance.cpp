@@ -21,11 +21,11 @@ vector<pair<long double, long double>> getCoordinates(string airports_file) {
             pos = airport.find(",", pos + 1);
             if (i == 4) {
                 size_t size = airport.find(",", pos + 1) - pos - 1;
-                lat = stold(airport.substr(pos + 1, size));
+                lat = atof(airport.substr(pos + 1, size).c_str());
             }
             if (i == 5) {
                 size_t size = airport.find(",", pos + 1) - pos - 1;
-                lont = stold(airport.substr(pos + 1, size));
+                lont = atof(airport.substr(pos + 1, size).c_str());
             }
         }
         latlong.push_back(pair<long double, long double> (lat, lont));
