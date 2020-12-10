@@ -17,15 +17,16 @@ vector<pair<long double, long double>> getCoordinates(string airports_file) {
     long double lat, lont;
     for (string airport : airports) {
         size_t pos = airport.find(",");
-        size_t pos1;
         for (size_t i = 0; i < 6; i++) {
             pos = airport.find(",", pos + 1);
-            if (i == 5) {
-                pos1 = airport.find(",", pos + 1);
-                lat = stold(airport.substr(pos + 1, pos1 - 1));
+            if (i == 4) {
+                size_t size = airport.find(",", pos + 1) - pos - 1;
+                lat = stold(airport.substr(pos + 1, size));
             }
-            pos = airport.find(",", pos1 + 1);
-            lont = stold(airport.substr(pos1 + 1, pos - 1));
+            if (i == 5) {
+                size_t size = airport.find(",", pos + 1) - pos - 1;
+                lont = stold(airport.substr(pos + 1, size));
+            }
         }
         latlong.push_back(pair<long double, long double> (lat, lont));
     }

@@ -1,3 +1,5 @@
+#pragma once
+
 #include "graphs.h"
 //#include "heap.h"
 #include <map>

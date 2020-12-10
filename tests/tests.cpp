@@ -1,13 +1,17 @@
-#include <string>
-#include <vector>
-
 #include "../catch/catch.hpp"
 #include "../readFromFile.hpp"
+#include "../xytodistance.hpp"
+#include "../Dijkstra.hpp"
 #include "../graphs.h"
 #include "../BFS.h"
 
+#include <string>
+#include <vector>
+
 TEST_CASE("Test Graph Constructor") {
-	Graph g = Graph("small_set_airports.txt", "small_set_routes.txt");
+	std::string airport_file = "small_set_airports.txt";
+	std::string route_file = "small_set_routes.txt";
+	Graph g = Graph(airport_file, route_file);
 	vector<Edge> edges = g.getEdges();
 	
 	REQUIRE(g.vertexExists("ORD"));
@@ -19,7 +23,9 @@ TEST_CASE("Test Graph Constructor") {
 }
 
 TEST_CASE("Testing BFS") {
-	Graph g = Graph("small_set_airports.txt", "small_set_routes.txt");
+	std::string airport_file = "small_set_airports.txt";
+	std::string route_file = "small_set_routes.txt";
+	Graph g = Graph(airport_file, route_file);
 	BFS bfs = BFS(g);
 	bfs.search();
 

@@ -1,9 +1,9 @@
 #include "graphs.h"
 #include "readFromFile.hpp"
-#include <map>
-#include"xytodistance.hpp"
+#include "xytodistance.hpp"
 
-using std::pair;
+#include <map>
+
 using std::map;
 
 const Vertex Graph::InvalidVertex = "_CS225INVALIDVERTEX";
@@ -19,15 +19,15 @@ Graph::Graph(string airports_file, string routes_file)
     vector<string> airports = file_to_vector(airports_file);
     map<string, pair<long double, long double>> locations;
     vector<pair<long double, long double>> coordinates = getCoordinates(airports_file);
-    int i = 0;
+    int idx = 0;
     for (string airport : airports) {
         size_t pos = airport.find(",");
         for (int i = 0; i < 3; i++) {
             pos = airport.find(",", pos + 1);
         }
-        insertVertex(airport.substr(pos + 1, pos + 4));
-        locations.insert(pair<string, pair<long double, long double>> (airport.substr(pos + 1, pos + 4), coordinates[i]));
-        i++;
+        insertVertex(airport.substr(pos + 2, 3));
+        locations.insert(pair<string, pair<long double, long double>> (airport.substr(pos + 2, 3), coordinates[idx]));
+        idx++;
     }
     Vertex source;
     Vertex destination;
@@ -185,7 +185,6 @@ void Graph::insertVertex(Vertex v)
 
 Vertex Graph::removeVertex(Vertex v)
 {
-
     if (adjacency_list.find(v) != adjacency_list.end())
     {
         if(!directed){

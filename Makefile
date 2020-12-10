@@ -33,7 +33,6 @@ $(EXENAME): output_msg $(OBJS)
 xytodistance.o: xytodistance.hpp xytodistance.cpp
 	$(CXX) $(CXXFLAGS) xytodistance.cpp
 
-
 Dijkstra.o: Dijkstra.hpp Dijkstra.cpp
 	$(CXX) $(CXXFLAGS) Dijkstra.cpp
 
