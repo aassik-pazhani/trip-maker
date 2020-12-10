@@ -30,8 +30,14 @@ output_msg: ; $(CLANG_VERSION_MSG)
 $(EXENAME): output_msg $(OBJS)
 	$(LD) $(OBJS) $(LDFLAGS) -o $(EXENAME)
 
-xytodistance.o: xytodistance.cpp
+xytodistance.o: xytodistance.hpp xytodistance.cpp
 	$(CXX) $(CXXFLAGS) xytodistance.cpp
+
+heap.o: heap.h heap.cpp
+	$(CXX) $(CXXFLAGS) heap.cpp
+
+Dijkstra.o: Dijkstra.hpp Dijkstra.cpp
+	$(CXX) $(CXXFLAGS) Dijkstra.cpp
 
 graph.o: graphs.cpp graphs.h
 	$(CXX) $(CXXFLAGS) graphs.cpp
@@ -42,8 +48,8 @@ BFS.o: BFS.cpp BFS.h
 readFromFile.o: main.cpp readFromFile.cpp
 	$(CXX) $(CXXFLAGS) main.cpp readFromFile.cpp
 
-test: output_msg catch/catchmain.cpp tests/tests.cpp readFromFile.cpp graphs.cpp BFS.cpp xytodistance.cpp
-	$(LD) catch/catchmain.cpp tests/tests.cpp readFromFile.cpp graphs.cpp BFS.cpp xytodistance.cpp $(LDFLAGS) -o test
+test: output_msg catch/catchmain.cpp tests/tests.cpp readFromFile.cpp graphs.cpp BFS.cpp xytodistance.cpp Dijkstra.cpp heap.cpp
+	$(LD) catch/catchmain.cpp tests/tests.cpp readFromFile.cpp graphs.cpp BFS.cpp xytodistance.cpp Dijkstra.cpp heap.cpp $(LDFLAGS) -o test
 
 clean:
 	-rm -f *.o $(EXENAME) test

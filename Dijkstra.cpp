@@ -36,7 +36,7 @@ vector<Vertex> Dijkstra(Graph* graph, Vertex source, Vertex destination) {
                 continue;
             }
             if ((graph->getEdgeWeight(current, adjacent) + label[current] < label[adjacent])) {
-                label.find(adjacent)->second = graph->getEdgeWeight(current, adjacent) + label.find(current)->second);
+                label.find(adjacent)->second = graph->getEdgeWeight(current, adjacent) + label.find(current)->second;
                 minHeap->push(pair<int, Vertex>(label[adjacent],adjacent));
                 previous.find(adjacent)->second = current;
             }  
