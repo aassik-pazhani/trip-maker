@@ -1,5 +1,5 @@
 EXENAME = finalproj
-OBJS = readFromFile.o main.o graphs.o BFS.o xytodistance.o
+OBJS = readFromFile.o main.o graphs.o BFS.o xytodistance.o Dijkstra.o Landmark.o 
 
 CXX = clang++
 CXXFLAGS = $(CS225) -std=c++1y -stdlib=libc++ -c -g -O0 -Wall -Wextra -pedantic
@@ -36,6 +36,9 @@ xytodistance.o: xytodistance.hpp xytodistance.cpp
 Dijkstra.o: Dijkstra.hpp Dijkstra.cpp
 	$(CXX) $(CXXFLAGS) Dijkstra.cpp
 
+Landmark.o: Landmark.hpp Landmark.cpp
+	$(CXX) $(CXXFLAGS) Landmark.cpp
+
 graph.o: graphs.cpp graphs.h
 	$(CXX) $(CXXFLAGS) graphs.cpp
 
@@ -45,8 +48,8 @@ BFS.o: BFS.cpp BFS.h
 readFromFile.o: main.cpp readFromFile.cpp
 	$(CXX) $(CXXFLAGS) main.cpp readFromFile.cpp
 
-test: output_msg catch/catchmain.cpp tests/tests.cpp readFromFile.cpp graphs.cpp BFS.cpp xytodistance.cpp Dijkstra.cpp
-	$(LD) catch/catchmain.cpp tests/tests.cpp readFromFile.cpp graphs.cpp BFS.cpp xytodistance.cpp Dijkstra.cpp $(LDFLAGS) -o test
+test: output_msg catch/catchmain.cpp tests/tests.cpp readFromFile.cpp graphs.cpp BFS.cpp xytodistance.cpp Dijkstra.cpp Landmark.cpp
+	$(LD) catch/catchmain.cpp tests/tests.cpp readFromFile.cpp graphs.cpp BFS.cpp xytodistance.cpp Dijkstra.cpp Landmark.cpp $(LDFLAGS) -o test
 
 clean:
 	-rm -f *.o $(EXENAME) test

@@ -74,5 +74,7 @@
         "typeinfo": "cpp",
         "utility": "cpp",
         "variant": "cpp"
-    }
-}
+    },
+    "extensions.ignoreRecommendations": true
+    "extensions.ignoreRecommendations": true,
+    "files.autoSave": "off"}

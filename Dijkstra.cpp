@@ -8,26 +8,25 @@ using std::map;
 using std::priority_queue;
 
 
-vector<Vertex> Dijkstra(Graph* graph, Vertex source, Vertex destination) {
-    map<Vertex, int> label;
-    map<Vertex, bool> visited;
-    map<Vertex, Vertex> previous;
-    for (Vertex v : graph->getVertices()) {
-        previous.insert(pair<Vertex, Vertex> (v, NULL));
+vector<Vertex> Dijkstra(Graph graph, Vertex source, Vertex destination) {
+    map<Vertex, int> distance; //distance from source
+    map<Vertex, bool> visited; //stores the visited vertex as true, else false
+    map<Vertex, Vertex> previous; //stores the previously visited vertex for all the vertices. Source has NULL.
+    for (Vertex v : graph.getVertices()) {
+        previous.insert(pair<Vertex, Vertex> (v, ""));
         visited.insert(pair<Vertex, bool>(v, false));
-        label.insert(pair<Vertex, int> (v, INT_MAX));
+        distance.insert(pair<Vertex, int> (v, INT_MAX));
     }
-    label[source] = 0;
+    distance[source] = 0;
     //vector of pairs with Vertex and its distance (intially infinity)
     vector<pair<int, Vertex>> distancePair;
-    for (Vertex V : graph->getVertices()) {
+    for (Vertex V : graph.getVertices()) {
         if (V == source) {
             distancePair.push_back(pair<int, Vertex> (0, V));    
         } else {
             distancePair.push_back(pair<int, Vertex> (INT_MAX, V)); 
         }
     }
-    //heap<pair<int, Vertex>>* minHeap = new heap<pair<int, Vertex>>(distancePair);
     priority_queue<pair<int, Vertex>, vector<pair<int, Vertex>>, comparison> minHeap;
     minHeap.push({0, source});
     
@@ -36,14 +35,13 @@ vector<Vertex> Dijkstra(Graph* graph, Vertex source, Vertex destination) {
         minHeap.pop();
         Vertex current = temp.second;
         visited.find(current)->second = true;
-        //int distU = temp.first();
-        for (Vertex adjacent : graph->getAdjacent(current)) {
+        for (Vertex adjacent : graph.getAdjacent(current)) {
             if (visited.find(adjacent)->second == true) {
                 continue;
             }
-            if ((graph->getEdgeWeight(current, adjacent) + label[current] < label[adjacent])) {
-                label.find(adjacent)->second = graph->getEdgeWeight(current, adjacent) + label.find(current)->second;
-                minHeap.push(pair<int, Vertex>(label[adjacent],adjacent));
+            if ((graph.getEdgeWeight(current, adjacent) + distance[current] < distance[adjacent])) {
+                distance.find(adjacent)->second = graph.getEdgeWeight(current, adjacent) + distance.find(current)->second;
+                minHeap.push(pair<int, Vertex>(distance[adjacent],adjacent));
                 previous.find(adjacent)->second = current;
             }  
         }
@@ -55,10 +53,10 @@ vector<Vertex> Dijkstra(Graph* graph, Vertex source, Vertex destination) {
 
 vector<Vertex> getPath(map<Vertex, Vertex> previous, Vertex source, Vertex destination) {
     vector<Vertex> path;
-    path.push_back(destination);
-    if (destination == source) {
-        return path;
+    while (destination != source) {
+        path.push_back(destination);
+        destination = previous[destination];
     }
-    path = getPath(previous, source, previous[destination]);
+    path.push_back(source);
     return path;
 }

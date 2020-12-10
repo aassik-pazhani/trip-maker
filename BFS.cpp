@@ -19,7 +19,6 @@ void BFS::search(Vertex v) {
     adjacent.push(v);
     while (!adjacent.empty()) {
         v = adjacent.front();
-        //std::cout << " destination: " << v << " " << std::endl;
         destinations.push_back(v);
         adjacent.pop();
         for (Vertex adj : graph.getAdjacent(v)) {

@@ -1,9 +1,7 @@
-#include "Dijkstra.hpp"
-#include<vector>
-using std::vector;
+#include "Landmark.hpp"
 
 //destinations appear twice (intentional to mark destinations)
-vector<Vertex> Landmark(Graph* graph, Vertex source, vector<Vertex> destinations) {
+vector<Vertex> Landmark(Graph graph, Vertex source, vector<Vertex> destinations) {
     vector<Vertex> path;
     vector<Vertex> shortpath;
     Vertex last = source;
