@@ -23,3 +23,10 @@ out our creation of a simple graph consisting of 2 routes between 3 airports. We
 that contains search functionalities that allow us to add to our destinations list as well as mark airports that 
 have been visited. Next week, we will add weights to our graphs (likely by assigning each node their respective 
 coordinates) and implement the two shortest path algorithms - Dijkstra’s Algorithm and Landmark Path Algorithm. 
+
+Week 4- Dec 10th
+
+This week, our team added the weights of edges to the graph where the weights are distances between airports. We
+also implemented the two shortest path algorithms - Dijkstra's and Landmark Path. We fixed the new bugs after 
+adding implementing them. We tested for the final input text file and saved our outputs in text files (executed in
+main.cpp). We added the comments and cleaned our codes for clear readability. We recorded our presentation in zoom and uploaded it in YouTube. 

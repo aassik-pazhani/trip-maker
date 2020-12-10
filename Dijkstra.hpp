@@ -1,15 +1,21 @@
+/**
+ * @file Dijkstra.h
+ * This file implements the shortest path - Dijkstra's Algorithm on a graph.
+ */
 #pragma once
 
 #include "graphs.h"
 #include <map>
 using std::map;
-
+/**
+ * Used for comparison of pairs
+ */
 struct comparison {
     /**
-     * 
-     * @param lhs - 
-     * @param rhs - 
-     * @return 
+     * @param lhs - first term to compare
+     * @param rhs - second term to compare
+     * @return -true, if int of lhs is smaller
+     *         -false, if int of rhs is smaller
      */
     bool operator()(const pair<int, Vertex> &lhs, const pair<int, Vertex> &rhs) const
     {

@@ -11,7 +11,7 @@ using std::priority_queue;
 vector<Vertex> Dijkstra(Graph graph, Vertex source, Vertex destination) {
     map<Vertex, int> distance; //distance from source
     map<Vertex, bool> visited; //stores the visited vertex as true, else false
-    map<Vertex, Vertex> previous; //stores the previously visited vertex for all the vertices. Source has NULL.
+    map<Vertex, Vertex> previous; //stores the previously visited vertex for all the vertices. Source has " ".
     for (Vertex v : graph.getVertices()) {
         previous.insert(pair<Vertex, Vertex> (v, ""));
         visited.insert(pair<Vertex, bool>(v, false));
@@ -19,7 +19,7 @@ vector<Vertex> Dijkstra(Graph graph, Vertex source, Vertex destination) {
     }
     distance[source] = 0;
     //vector of pairs with Vertex and its distance (intially infinity)
-    vector<pair<int, Vertex>> distancePair;
+    vector<pair<int, Vertex>> distancePair; //pairs of vertices and their distance from source.
     for (Vertex V : graph.getVertices()) {
         if (V == source) {
             distancePair.push_back(pair<int, Vertex> (0, V));    
@@ -27,7 +27,7 @@ vector<Vertex> Dijkstra(Graph graph, Vertex source, Vertex destination) {
             distancePair.push_back(pair<int, Vertex> (INT_MAX, V)); 
         }
     }
-    priority_queue<pair<int, Vertex>, vector<pair<int, Vertex>>, comparison> minHeap;
+    priority_queue<pair<int, Vertex>, vector<pair<int, Vertex>>, comparison> minHeap; //minheap priority queue to get the lowest distance.
     minHeap.push({0, source});
     
     while (!minHeap.empty()) {
