@@ -4,11 +4,11 @@
 
 The primary aim of this project is to identify the shortest route between two given airport destinations by using Dijkstra's and Landmark Algorithms. If there exists a *direct* route between the two airport destinations, Dijkstra's algorithm will be used. If a direct route does not exist, the shortest route accounting layover flights will be identified using the Landmark algorithm.
 
-###### Datasets and Traversals
+### Datasets and Traversals
 
 This project will use the [OpenFlights](https://openflights.org/data.html/) dataset. The unique IATA identifier code will be used thoughout the project when referring to airports. Our project uses BFS when traversing the tree.
 
-###### Running The Program
+### Running The Program
 
 To run our program, open `main.cpp` and scroll down to the `outputs` vector. It will look similar to this:
 
