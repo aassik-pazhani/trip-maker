@@ -33,8 +33,6 @@ $(EXENAME): output_msg $(OBJS)
 xytodistance.o: xytodistance.hpp xytodistance.cpp
 	$(CXX) $(CXXFLAGS) xytodistance.cpp
 
-heap.o: heap.h heap.cpp
-	$(CXX) $(CXXFLAGS) heap.cpp
 
 Dijkstra.o: Dijkstra.hpp Dijkstra.cpp
 	$(CXX) $(CXXFLAGS) Dijkstra.cpp
@@ -48,8 +46,8 @@ BFS.o: BFS.cpp BFS.h
 readFromFile.o: main.cpp readFromFile.cpp
 	$(CXX) $(CXXFLAGS) main.cpp readFromFile.cpp
 
-test: output_msg catch/catchmain.cpp tests/tests.cpp readFromFile.cpp graphs.cpp BFS.cpp xytodistance.cpp Dijkstra.cpp heap.cpp
-	$(LD) catch/catchmain.cpp tests/tests.cpp readFromFile.cpp graphs.cpp BFS.cpp xytodistance.cpp Dijkstra.cpp heap.cpp $(LDFLAGS) -o test
+test: output_msg catch/catchmain.cpp tests/tests.cpp readFromFile.cpp graphs.cpp BFS.cpp xytodistance.cpp Dijkstra.cpp
+	$(LD) catch/catchmain.cpp tests/tests.cpp readFromFile.cpp graphs.cpp BFS.cpp xytodistance.cpp Dijkstra.cpp $(LDFLAGS) -o test
 
 clean:
 	-rm -f *.o $(EXENAME) test

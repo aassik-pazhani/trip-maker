@@ -1,9 +1,12 @@
 #include <map>
 #include <algorithm>
+#include <queue>
 #include "Dijkstra.hpp"
 
 using std::pair;
 using std::map;
+using std::priority_queue;
+
 
 vector<Vertex> Dijkstra(Graph* graph, Vertex source, Vertex destination) {
     map<Vertex, int> label;
@@ -24,10 +27,13 @@ vector<Vertex> Dijkstra(Graph* graph, Vertex source, Vertex destination) {
             distancePair.push_back(pair<int, Vertex> (INT_MAX, V)); 
         }
     }
-    heap<pair<int, Vertex>>* minHeap = new heap<pair<int, Vertex>>(distancePair);
+    //heap<pair<int, Vertex>>* minHeap = new heap<pair<int, Vertex>>(distancePair);
+    priority_queue<pair<int, Vertex>, vector<pair<int, Vertex>>, comparison> minHeap;
+    minHeap.push({0, source});
     
-    while (!minHeap->empty()) {
-        pair<int, Vertex> temp = minHeap->pop();
+    while (!minHeap.empty()) {
+        pair<int, Vertex> temp = minHeap.top();
+        minHeap.pop();
         Vertex current = temp.second;
         visited.find(current)->second = true;
         //int distU = temp.first();
@@ -37,7 +43,7 @@ vector<Vertex> Dijkstra(Graph* graph, Vertex source, Vertex destination) {
             }
             if ((graph->getEdgeWeight(current, adjacent) + label[current] < label[adjacent])) {
                 label.find(adjacent)->second = graph->getEdgeWeight(current, adjacent) + label.find(current)->second;
-                minHeap->push(pair<int, Vertex>(label[adjacent],adjacent));
+                minHeap.push(pair<int, Vertex>(label[adjacent],adjacent));
                 previous.find(adjacent)->second = current;
             }  
         }
